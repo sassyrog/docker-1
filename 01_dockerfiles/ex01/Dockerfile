@@ -17,3 +17,6 @@ RUN wget http://dl.4players.de/ts/releases/$TSV/teamspeak3-server_linux_amd64-$T
 WORKDIR teamspeak3-server_linux_amd64
 
 ENTRYPOINT sh ts3server_minimal_runscript.sh
+
+#build and run
+#docker build -t ex01 . && docker run --rm -p 9987:9987/udp -p 30033:30033 -p 10011:10011 ex01
