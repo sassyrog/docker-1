@@ -1,12 +1,19 @@
-FROM alpine
+FROM debian
 
+ENV TS3SERVER_LICENSE=accept
 ENV TSV=3.8.0
 
-RUN apk update && \
-    apk add bzip2 wget ca-certificates && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /home/teamspeak
 
-RUN wget https://files.teamspeak-services.com/releases/server/$TSV/teamspeak3-server_linux_amd64-$TSV.tar.bz2
+EXPOSE 9987/udp 10011 30033
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y wget bzip2
+    
+RUN wget http://dl.4players.de/ts/releases/$TSV/teamspeak3-server_linux_amd64-$TSV.tar.bz2 && \
+    tar -xvf teamspeak3-server_linux_amd64-$TSV.tar.bz2
 
-RUN adduser --disabled-login teamspeak
+WORKDIR teamspeak3-server_linux_amd64
+
+ENTRYPOINT sh ts3server_minimal_runscript.sh
