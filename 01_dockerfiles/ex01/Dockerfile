@@ -1,5 +1,7 @@
 FROM debian
 
+LABEL maintainer="Roger Ndaba"
+
 ENV TS3SERVER_LICENSE=accept
 ENV TSV=3.8.0
 

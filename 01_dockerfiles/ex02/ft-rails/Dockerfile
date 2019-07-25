@@ -1,5 +1,7 @@
 FROM ruby:2.6
 
+LABEL maintainer="Roger Ndaba"
+
 RUN apt-get update && \
 	apt-get -f install -y build-essential
 
