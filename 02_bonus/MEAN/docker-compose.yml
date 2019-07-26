@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  angular:
+    build: app-client
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./app-client/:/var/www/app
+
+  express:
+    build: app-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app-server/:/var/www/app
+    links:
+      - db
+
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
