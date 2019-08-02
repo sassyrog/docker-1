@@ -1,18 +1,15 @@
 docker-machine ssh Char
-docker-machine ssh Char docker run --name Abathur -dit -v $HOME:/root -p 3000:3000 -d python:2-slim
+docker run --name Abathur -v /home/docker:/root -p 3000:3000 -itd python:2-slim
 touch $HOME/hello.py && chmod 755 $HOME/hello.py
-vim hello.py && exit
 
-
-from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return '<h1>Hello, World!</h1>'\nif __name__ == "__main__":\n\tapp.run("0.0.0.0", port=3000, debug=True)
-
-
-
+# from flask import Flask
+# app = Flask(__name__)
+#
+# @app.route('/')
+# def hello_world():
+#     return '<h1>Hello, World!</h1>'
+# if __name__ == "__main__":
+    # app.run("0.0.0.0", port=3000, debug=True)
 docker exec Abathur pip install --upgrade pip
-docker exec Abathur pip install flask
-docker exec --env FLASK_APP=/root/hello.py Abathur flask run --host=0.0.0.0 --port=4001
+docker exec Abathur pip install Flask
+docker exec -e FLASK_APP=/root/hello.py Abathur flask run --host=0.0.0.0 --port=3000

@@ -1,1 +1,1 @@
-docker service ps -a marines
+docker service ps marines

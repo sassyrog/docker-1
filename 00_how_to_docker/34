@@ -1,2 +1,1 @@
-#docker-machine rm -f $(docker-machine ls --format "{{.Name}}")
-docker-machine rm -y Auir
+docker-machine rm -f $(docker-machine ls --format "{{.Name}}")

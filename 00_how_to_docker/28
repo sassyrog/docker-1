@@ -1,2 +1,2 @@
 docker pull 42school/marine-squad
-docker service create --name marines --network overmind --replicas=2 -e OC_USERNAME="roger" -e OC_PASSWD="roger" 42school/marine-squad:latest
+docker service create --name marines --network overmind --replicas=2 -e OC_USERNAME="roger" -e OC_PASSWD="roger" -d 42school/marine-squad:latest
