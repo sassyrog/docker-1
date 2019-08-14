@@ -1,0 +1,43 @@
+.select-custom select {
+	display: none;
+}
+
+.select-custom {
+	background-color: #8fff7b;
+	width: auto;
+	min-width: 217px;
+	border-radius: 0.25rem;
+	position: relative;
+	cursor: pointer;
+}
+
+.selected-option {
+	overflow: hidden;
+}
+
+.select-hide {
+	display: none;
+}
+
+.select-items .selected {
+	background: #ffffff;
+}
+
+.select-items {
+	position: absolute;
+	min-width: 217px;
+	z-index: 1;
+}
+
+.select-items div {
+	overflow: hidden;
+	background-color: #8fff7b;
+	border-radius: 0.25rem;
+	border: 1px solid #000000;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.select-items div:hover {
+	background-color: #ffffff;
+}

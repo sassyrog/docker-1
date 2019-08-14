@@ -1,38 +1,26 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
-ENV USER=root
+LABEL maintainer="Roger Ndaba"
 
-RUN apt-get update -y && \
-	apt-get upgrade -y && \
-	apt-get install git build-essential gcc build-essential  wget -y
+ENV TERM xterm
 
-RUN wget https://dl.gogs.io/0.11.66/gogs_0.11.66_linux_amd64.tar.gz && \
-	tar -xvf gogs_0.11.66_linux_amd64.tar.gz
+RUN apt-get update
 
-WORKDIR /gogs
+RUN apt-get update && \
+	DEBIAN_FRONTEND=noninteractive \
+	apt-get install -y --no-install-recommends \
+	wget ca-certificates postfix openssh-server
+RUN wget https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh && \
+	chmod 777 script.deb.sh && \
+	./script.deb.sh
 
-EXPOSE 3000
-EXPOSE 8022
+RUN EXTERNAL_URL="http://192.168.99.100:8080"
 
-ENTRYPOINT ./gogs web
+RUN apt-get install -y tzdata gitlab-ce
 
-# ENV TERM xterm
+EXPOSE 443 80 22
 
-# RUN apt-get update && \
-# 	apt-get upgrade -y && \
-# 	apt-get install -y ca-certificates \
-# 	openssh-server \
-# 	wget \
-# 	postfix
 
-# RUN wget https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh && \
-# 	chmod 777 script.deb.sh && \
-# 	./script.deb.sh
-
-# RUN apt-get install -y tzdata gitlab-ce
-
-# EXPOSE 80 22
-
-# ENTRYPOINT (/opt/gitlab/embedded/bin/runsvdir-start &) && \
-# 	gitlab-ctl reconfigure && \
-# 	tail -f /dev/null
+CMD (/opt/gitlab/embedded/bin/runsvdir-start &) && \
+	gitlab-ctl reconfigure && \
+	tail -f /dev/null

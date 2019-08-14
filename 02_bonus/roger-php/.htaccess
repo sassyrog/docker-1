@@ -1,0 +1,6 @@
+RewriteEngine On    # Turn on the rewriting engine
+RewriteRule    ^(login|signup|home|logout)/?$    index.php    [NC,L] 
+
+ErrorDocument 404 /public/error_pages/404.php
+ErrorDocument 500 /public/error_pages/500.php
+ErrorDocument 403 /public/error_pages/404.php

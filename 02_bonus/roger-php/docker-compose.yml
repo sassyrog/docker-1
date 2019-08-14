@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  webserver:
+    build: 
+      context: ./bin/apache
+    container_name: 'rogerphp'
+    restart: 'always'
+    ports:
+      - "8080:80"
+    links: 
+      - mysql
+    volumes: 
+      - .:/var/www/html/
+      - ./server/config:/etc/apache2/sites-enabled
+      - ./server/logs/apache:/var/log/apache2
+  mysql:
+    build: ./bin/mysql
+    container_name: 'mysql'
+    restart: 'always'
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./server/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Rootroot2
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Rootroot2
+      MYSQL_DATABASE: GetSchwifty
